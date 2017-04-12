@@ -8,21 +8,23 @@ var inquirer = require ("inquirer");
 function BasicCard (front, back) {
 	this.front = front;
 	this.back = back;
-
-	this.verifyInfo = function() {
-		console.log("You wrote:");
-		console.log("Flashcard front: " + front);
-		console.log("Flashcard back: " + back);
-	};
-
-	this.showFront = function() {
-		console.log("Q: " + front);
-	};
-
-	this.showBack = function() {
-		console.log("A: " + back);
-	};
 };
+
+// Add functions to BasicCard
+BasicCard.prototype.verifyInfo = function() {
+	console.log("You wrote:");
+	console.log("Flashcard front: " + this.front);
+	console.log("Flashcard back: " + this.back);
+};
+
+BasicCard.prototype.showFront = function() {
+	console.log("Q: " + this.front);
+};
+
+BasicCard.prototype.showBack = function() {
+	console.log("A: " + this.back);
+};
+
 
 // How many cards the user wants to make
 var cardsNeeded = "";
@@ -65,8 +67,13 @@ var basicPrompts = function () {
 		});
 	// else statement which runs a for loop that will execute .printInfo() for each object inside of our array
 	} else {
-		console.log("All cards have been stored. Please press 'Enter' & then type 'run-cards' to run application. NOTE: This function is not yet working so please don't type it!");
+		console.log("All cards have been stored.");
+		// console.log("Please press 'Enter' & then type 'run-cards' to run application. NOTE: This function is not yet working so please don't type it!");
 		console.log(basicCardArray);
+		// console.log(JSON.parse(basicCardArray.BasicCard[0].front));
+
+	    // Store the data
+		fs.writeFile("basic-flashcards.txt", JSON.stringify(basicCardArray));
 	}
 }
 
