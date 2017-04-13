@@ -1,0 +1,23 @@
+{
+  "name": "flashcard-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "flashcard.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpetey/flashcard-generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpetey/flashcard-generator/issues"
+  },
+  "homepage": "https://github.com/jpetey/flashcard-generator#readme",
+  "dependencies": {
+    "inquirer": "^3.0.6"
+  },
+  "devDependencies": {}
+}

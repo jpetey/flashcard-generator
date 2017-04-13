@@ -1,0 +1,1 @@
+[{"textBeforeCloze":"","cloze":"CC","textAfterCloze":" is the capital of NV"},{"textBeforeCloze":"The mayor of LV is ","cloze":"Goodman","textAfterCloze":""}]

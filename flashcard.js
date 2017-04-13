@@ -4,6 +4,36 @@ var fs = require ('fs');
 // Incorporate the fs package to prompt user with questions
 var inquirer = require ("inquirer");
 
+// Ask user what kind of Flashcard (Basic or Cloze) that they'd like to make
+inquirer.prompt([
+	{
+		type: "list",
+	    name: "flashcardType",
+	    message: "What kind of Flashcard would you like to make?",
+	    choices: [ "Basic", "Cloze" ]
+	},
+	{
+		type: "input",
+	    name: "cardCountInput",
+	    message: "How many Flashcards would you like to make?"
+	}
+
+]).then(function(selection) {
+
+	cardsNeeded = parseInt(selection.cardCountInput);
+
+	if (selection.flashcardType === "Basic") {
+
+		basicPrompts();
+
+	} else if (selection.flashcardType === "Cloze") {
+
+		clozePrompts();
+
+	}
+});
+
+
 // BasicCard Constructor
 function BasicCard (front, back) {
 	this.front = front;
@@ -70,8 +100,6 @@ var basicPrompts = function () {
 		console.log("All cards have been stored.");
 		// console.log("Please press 'Enter' & then type 'run-cards' to run application. NOTE: This function is not yet working so please don't type it!");
 		console.log(basicCardArray);
-		// console.log(JSON.parse(basicCardArray.BasicCard[0].front));
-
 	    // Store the data
 		fs.writeFile("basic-flashcards.txt", JSON.stringify(basicCardArray));
 	}
@@ -81,34 +109,75 @@ var basicPrompts = function () {
 //================================
 
 // ClozeCard Constructor
-function ClozeCard (text, cloze) {
-	this.text = text;
+function ClozeCard (textBeforeCloze, cloze, textAfterCloze) {
+	this.textBeforeCloze = textBeforeCloze;
 	this.cloze = cloze; 
+	this.textAfterCloze = textAfterCloze; 
 };
 
-//================================
+ClozeCard.prototype.verifyInfo = function() {
+	console.log("You wrote:");
+	console.log(this.textBeforeCloze + this.cloze +	this.textAfterCloze); 
+	console.log("Where '" + this.cloze + "' will be hidden." );
+};
 
-inquirer.prompt([
-	{
-		type: "list",
-	    name: "flashcardType",
-	    message: "What kind of Flashcard would you like to make?",
-	    choices: [ "Basic", "Cloze" ]
-	},
-	{
-		type: "input",
-	    name: "cardCountInput",
-	    message: "How many Flashcards would you like to make?"
+// ClozeCard.prototype.showFront = function() {
+// 	console.log("Q: " + this.front);
+// };
+
+// ClozeCard.prototype.showBack = function() {
+// 	console.log("A: " + this.back);
+// };
+
+
+// How many cards the user wants to make
+var cardsNeeded = "";
+// Our card counter variable for recusion
+var cardCount = 0;
+// array in which we will store each of our new basicCard objects
+var clozeCardArray = [];
+
+var clozePrompts = function () {
+
+	if (cardCount < cardsNeeded) {
+
+		inquirer.prompt([
+			{
+				type: "input",
+			    name: "clozeText",
+			    message: "Please enter what you would like your card to read. Surround Cloze text in asterisks (*). \nFor example: '*Sacramento* is the capital of California.' will initally hide 'Sacramento'.\n"
+			},
+
+		]).then(function(content) {
+			// initialize variable userBasicCard to be a BasicCard object to take in user's content inputs
+			
+			var userInputForCloze = content.clozeText;	
+
+			var userResponseArray = userInputForCloze.split("*");
+
+			var userClozeCard = new ClozeCard (
+	        	userResponseArray[0],
+	        	userResponseArray[1],
+	        	userResponseArray[2]);
+
+			// Show that the userBasicCard object was successfully created and filled
+     		userClozeCard.verifyInfo();
+     		// Push userBasicCard object into basicCardArray
+		    clozeCardArray.push(userClozeCard);
+		    // add one to count to increment our recursive loop by one
+		    cardCount++;
+		    // run the askquestion function again so as to either end the loop or ask the questions again
+		    clozePrompts();
+
+		});
+	// else statement which runs a for loop that will execute .printInfo() for each object inside of our array
+	} else {
+		console.log("All cards have been stored.");
+		// console.log("Please press 'Enter' & then type 'run-cards' to run application. NOTE: This function is not yet working so please don't type it!");
+		console.log(clozeCardArray);
+	    // Store the data
+		fs.writeFile("cloze-flashcards.txt", JSON.stringify(clozeCardArray));
 	}
+}
 
-]).then(function(selection) {
-
-	cardsNeeded = parseInt(selection.cardCountInput);
-
-	if (selection.flashcardType === "Basic") {
-
-		basicPrompts();
-
-	} else if (selection.flashcardType === "Cloze") {}
-});
 
