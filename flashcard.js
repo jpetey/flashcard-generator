@@ -138,7 +138,7 @@ ClozeCard.prototype.guessCloze = function() {
 	var userClozeGuess = process.argv[2];
 
 	switch (userClozeGuess) {
-		case this.close: 
+		case this.cloze: 
 			console.log("Correct!");
 			this.returnFullText;
 			break;
@@ -163,7 +163,15 @@ var clozePrompts = function () {
 			{
 				type: "input",
 			    name: "clozeText",
-			    message: "Please enter what you would like your card to read. Surround Cloze text in asterisks (*). \nFor example: '*Sacramento* is the capital of California.' will initally hide 'Sacramento'.\n"
+			    message: "Please enter what you would like your card to read. Surround Cloze text in asterisks (*). \nFor example: '*Sacramento* is the capital of California' will initally store 'Sacramento' as teh cloze.\n",
+			    validate: function (value) {
+      				var pass = value.match(/\*/g);
+      					if (length.pass === 2) {
+        					return true;
+      					}
+
+     			 		return 'Please check your input format and try again.';
+    					}	
 			},
 
 		]).then(function(content) {
