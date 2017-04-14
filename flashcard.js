@@ -169,7 +169,7 @@ var clozePrompts = function () {
 		]).then(function(content) {
 			// initialize variable userBasicCard to be a BasicCard object to take in user's content inputs
 			
-			var userInputForCloze = content.clozeText;	
+			var userInputForCloze = content.clozeText;
 
 			var userResponseArray = userInputForCloze.split("*");
 
