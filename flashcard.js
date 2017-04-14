@@ -121,13 +121,31 @@ ClozeCard.prototype.verifyInfo = function() {
 	console.log("Where '" + this.cloze + "' will be hidden." );
 };
 
-// ClozeCard.prototype.showFront = function() {
-// 	console.log("Q: " + this.front);
-// };
+ClozeCard.prototype.returnPartialText = function() {
+	console.log("Fill in: the blank:": this.textBeforeCloze + "___________" + this.textAfterCloze);
+};
 
-// ClozeCard.prototype.showBack = function() {
-// 	console.log("A: " + this.back);
-// };
+ClozeCard.prototype.returnCloze = function() {
+	console.log("Your cloze is: ": this.cloze);
+};
+
+ClozeCard.prototype.returnFullText = function() {
+	console.log("Full answer: " + this.textBeforeCloze + "*" + this.cloze + "*" + this.textAfterCloze); 
+};
+
+ClozeCard.prototype.guessCloze = function() {
+	
+	var userClozeGuess = process.argv[2];
+
+	switch (userClozeGuess) {
+		case this.close: 
+			console.log("Correct!");
+			this.returnFullText;
+			break;
+		default:
+			console.log("Incorrect!");
+	}
+};
 
 
 // How many cards the user wants to make
