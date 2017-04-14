@@ -1,1 +1,1 @@
-[{"textBeforeCloze":"","cloze":"CC","textAfterCloze":" is the capital of NV"},{"textBeforeCloze":"The mayor of LV is ","cloze":"Goodman","textAfterCloze":""}]
+[{"textBeforeCloze":"","cloze":"George Washington","textAfterCloze":" was the first POTUS."},{"textBeforeCloze":"The ","cloze":"Cubs","textAfterCloze":" won the 2016 World Series."}]

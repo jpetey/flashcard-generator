@@ -1,1 +1,1 @@
-[{"front":"f","back":"f"},{"front":"f","back":"f"}]
+[{"front":"What is capital of Massachusetts?","back":"Boston"},{"front":"Who was the first POTUS?","back":"GW"}]

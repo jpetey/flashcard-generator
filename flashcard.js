@@ -122,11 +122,11 @@ ClozeCard.prototype.verifyInfo = function() {
 };
 
 ClozeCard.prototype.returnPartialText = function() {
-	console.log("Fill in: the blank:": this.textBeforeCloze + "___________" + this.textAfterCloze);
+	console.log("Fill in: the blank: " + this.textBeforeCloze + "___________" + this.textAfterCloze);
 };
 
 ClozeCard.prototype.returnCloze = function() {
-	console.log("Your cloze is: ": this.cloze);
+	console.log("Your cloze is: " + this.cloze);
 };
 
 ClozeCard.prototype.returnFullText = function() {
@@ -163,10 +163,11 @@ var clozePrompts = function () {
 			{
 				type: "input",
 			    name: "clozeText",
-			    message: "Please enter what you would like your card to read. Surround Cloze text in asterisks (*). \nFor example: '*Sacramento* is the capital of California' will initally store 'Sacramento' as teh cloze.\n",
+			    message: "Please enter what you would like your card #"+ (cardCount + 1) + " to read. Surround Cloze text in asterisks (*). \nFor example: '*Sacramento* is the capital of California' will initally store 'Sacramento' as the cloze.\n",
 			    validate: function (value) {
       				var pass = value.match(/\*/g);
-      					if (length.pass === 2) {
+      				console.log(pass);
+      					if (pass.length === 2) {
         					return true;
       					}
 
